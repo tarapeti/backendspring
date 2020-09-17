@@ -57,7 +57,28 @@ public class UserController {
         }
     }
     @GetMapping(path = "/user")
+    public List<User> getAll(){
+        return userService.getAll();
+    }
 
+    @GetMapping(path = "/user/{id}")
+    public @ResponseBody
+    User getById(@RequestBody int id){
+        return userService.getById(id);
+    }
+
+    @PostMapping("/user")
+    public void register(@RequestBody User user) {
+        userService.save(user);
+    }
+
+
+    @DeleteMapping(path = "/user/{id}")
+    @Transactional
+    public @ResponseBody
+    void deleteUser(@RequestParam int userId) {
+        userService.deleteById(userId);
+    }
 
 }
 
